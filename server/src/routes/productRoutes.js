@@ -10,7 +10,6 @@ const router = express.Router();
 
 router.get("/", getAllProducts);
 router.get("/productdetails/:id", getProductDetails);
-router.get("/search", searchProducts);
 router.get("/:productId/specifications", getProductSpecifications);
 router.get('/:productId/images', getImagesByProductId);
 

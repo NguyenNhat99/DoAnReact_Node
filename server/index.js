@@ -17,6 +17,7 @@ const { getCommentsByProduct , addComment } = require('./src/app/controller/Comm
 const { getAllAccountsUser, getProfileUser,updateProfileUser,changePasswordUser, 
   getOrderUser,
   getOrderDetails } = require("./src/app/controller/AccountUserController");
+  const {searchProducts} = require("./src/app/controller/ProductController")
 
 const privateSiteRoutes = require("./src/routes/privateSiteRoutes");
 const authRoutes = require("./src/routes/authenRoutes");
@@ -25,6 +26,7 @@ const productRoutes = require("./src/routes/productRoutes");
 const cartRoutes = require("./src/routes/cartRoutes");
 const checkoutRoutes = require("./src/routes/checkoutRoutes");
 
+app.get("/search", searchProducts);
 
 app.get('/comments/:productId', getCommentsByProduct);
 
