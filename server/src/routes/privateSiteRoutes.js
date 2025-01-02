@@ -2,7 +2,8 @@ const express = require("express");
 const { getAllAccounts, 
     getProfileAdmin, 
     updateProfileAdmin, 
-    changePassword } = require("../app/controller/AccountController");
+    changePassword,
+    changeGroupAccount } = require("../app/controller/AccountController");
 const { getAllProducts, 
     addProduct, 
     deleteProduct, 
@@ -29,6 +30,7 @@ router.get("/accountmanagement", authorize(["Quản trị"]), getAllAccounts);
 router.get("/profile", authorize(["Quản trị"]), getProfileAdmin);
 router.put("/updateprofile", authorize(["Quản trị"]), updateProfileAdmin);
 router.put("/profile/changepassword", authorize(["Quản trị"]), changePassword);
+router.put("/accountmanagement/changegroupaccount/:id", authorize(["Quản trị"]), changeGroupAccount);
 
 // Sản phẩm
 router.get("/products",authorize(["Quản trị"]),getAllProducts);

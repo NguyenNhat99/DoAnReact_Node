@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation ,useParams,Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const DetailAccount = ({ onPasswordChange }) => {
     const token = localStorage.getItem("token");
@@ -9,8 +10,58 @@ const DetailAccount = ({ onPasswordChange }) => {
     }
     const { state } = useLocation();
     const account = state?.account;
-    console.log(account)
-  
+    const { id } = useParams();
+    const handleRoleAssignment = async () => {
+        console.log(account)
+        try {
+          const result = await Swal.fire({
+            title: 'Chọn quyền cho người dùng',
+            input: 'select',
+            inputOptions: {
+              1: 'Quản trị viên',
+              2: 'Người dùng',
+            },
+            inputPlaceholder: 'Chọn quyền',
+            showCancelButton: true,
+            confirmButtonText: 'Xác nhận',
+            cancelButtonText: 'Hủy',
+          });
+      
+          if (result.isConfirmed) {
+            const response = await fetch(
+              `http://localhost:3000/privatesite/accountmanagement/changegroupaccount/${id}`,
+              {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ GroupId: result.value }),
+              }
+            );
+      
+            if (response.ok) {
+              Swal.fire(
+                'Thành công!',
+                `Đã gán quyền: ${
+                  result.value === '1' ? 'Quản trị viên' : 'Người dùng'
+                }`,
+                'success'
+              );
+              window.location.reload(true);
+            } else {
+              Swal.fire(
+                'Thất bại!',
+                'Không thể thay đổi quyền, hãy thử lại sau.',
+                'error'
+              );
+            }
+          }
+        } catch (error) {
+          Swal.fire('Lỗi', 'Đã xảy ra lỗi: ' + error.message, 'error');
+        }
+      };
+      
     if (!account) {
       return <div>Không có thông tin tài khoản.</div>;
     }
@@ -52,7 +103,7 @@ const DetailAccount = ({ onPasswordChange }) => {
                                     </h3>
                                     <ul className="list-group list-group-unbordered mb-3">
                                         <li className="list-group-item">
-                                            <b>Nhóm tài khoản: </b> {account.idgroup == 1 ? 'quản trị' : 'người dùng'}
+                                            <b>Nhóm tài khoản: </b> {account.IdGroup === 1 ? 'quản trị' : 'người dùng'}
                                             {/* <a className="float-right text-decoration-none c-black">{groupName}</a> */}
                                         </li>
                                     </ul>
@@ -155,6 +206,7 @@ const DetailAccount = ({ onPasswordChange }) => {
                                                     />
                                                 </div>
                                             </div>
+                                        <button className='btn btn-warning'  onClick={handleRoleAssignment}>Phân quyền</button>
                                         </div>
                                     </div>
                                 </div>

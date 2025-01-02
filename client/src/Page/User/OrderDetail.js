@@ -58,7 +58,7 @@ const OrderDetails = () => {
                                 <p><strong>Ngày tạo:</strong> {new Date(order[0].Order.CreateAt).toLocaleString()}</p>
                                 <p><strong>Phương thức thanh toán:</strong> {order[0].Order.PaymentMethod}</p>
                                 <p><strong>Tổng giá trị:</strong> {order[0].Order.TotalPrice.toLocaleString()} VND</p>
-                                <p><strong>Trạng thái đơn hàng:</strong> {order[0].Order.OrderStatus === 0 ? 'Chờ xử lý' : 'Đã hoàn thành'}</p>
+                                <p><strong>Trạng thái đơn hàng:</strong> {order[0].Order.OrderStatusId === 1 ? 'Thành công'  : order[0].Order.OrderStatusId === 2 ? "Thất bại" : order[0].Order.OrderStatusId === 3 ? "Đang xử lí" : order[0].Order.OrderStatusId === 5 ? "Đang vận chuyển" : "Đã hủy"}</p>
                             </div>
                         </div>
                     </section>

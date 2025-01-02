@@ -65,7 +65,7 @@ exports.checkout = async (req, res) => {
       SubPrice: subPrice,    // SubPrice là tổng giá trị giỏ hàng
       Discount: discount,    // Discount mặc định = 0
       CreateAt: new Date(),
-      OrderStatus : 0,
+      OrderStatusId : 3,
     });
 
     // Đảm bảo rằng OrderId đã được tạo

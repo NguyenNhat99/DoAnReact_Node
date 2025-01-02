@@ -154,9 +154,9 @@ const AddProductForm = () => {
                     name="ProductName"
                     className="form-control"
                     id="productName"
+                    placeholder="Nhập tên sản phẩm"
                     value={productName}
                     onChange={(e) => setProductName(e.target.value)}
-                    placeholder="Nhập tên sản phẩm"
                   />
                 </div>
                 <div className="mb-3">
@@ -254,7 +254,7 @@ const AddProductForm = () => {
                     id="productDiscount"
                     value={productDiscount}
                     onChange={(e) => setProductDiscount(e.target.value)}
-                    placeholder="Nhập giá sản phẩm"
+                    placeholder="Nhập giảm giá sản phẩm"
                   />
                 </div>
                 <div className="mb-3">

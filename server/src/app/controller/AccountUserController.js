@@ -166,14 +166,10 @@ exports.getOrderUser = async (req, res) => {
                 .status(404)
                 .json({ message: "Khách hàng này chưa có đơn hàng nào." });
         }
-
         // Trả về danh sách đơn hàng
         res.json({ customer, orders });
     } catch (err) {
         console.error("Error: ", err.message);
-        // if (err.name === "JsonWebTokenError") {
-        //     return res.status(401).json({ message: "Token không hợp lệ" });
-        // }
         res.status(500).json({ error: err.message });
     }
 };

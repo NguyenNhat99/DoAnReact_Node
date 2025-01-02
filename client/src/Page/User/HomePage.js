@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Slidebar from '../../Component/Slidebar/Sidebar';
 const Content = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // Trạng thái tải
@@ -38,67 +39,8 @@ const Content = () => {
 
   return (
     <div>
-      <div className="service-promo-section section-top-gap-100">
-        <div className="service-wrapper">
-          <div className="container">
-            <div className="row">
-              {/* Start Service Promo Single Item */}
-              <div className="col-lg-3 col-sm-6 col-12">
-                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
-                  <div className="image">
-                    <img src="/images/service-promo-5.png" alt="" />
-                  </div>
-                  <div className="content">
-                    <h6 className="title">FREE SHIPPING</h6>
-                   
-                  </div>
-                </div>
-              </div>
-              {/* End Service Promo Single Item */}
-               {/* Start Service Promo Single Item */}
-               <div className="col-lg-3 col-sm-6 col-12">
-                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
-                  <div className="image">
-                    <img src="/images/service-promo-5.png" alt="" />
-                  </div>
-                  <div className="content">
-                    <h6 className="title">FREE SHIPPING</h6>
-                   
-                  </div>
-                </div>
-              </div>
-              {/* End Service Promo Single Item */}
-               {/* Start Service Promo Single Item */}
-               <div className="col-lg-3 col-sm-6 col-12">
-                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
-                  <div className="image">
-                    <img src="/images/service-promo-5.png" alt="" />
-                  </div>
-                  <div className="content">
-                    <h6 className="title">FREE SHIPPING</h6>
-                   
-                  </div>
-                </div>
-              </div>
-              {/* End Service Promo Single Item */}
-               {/* Start Service Promo Single Item */}
-               <div className="col-lg-3 col-sm-6 col-12">
-                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
-                  <div className="image">
-                    <img src="/images/service-promo-5.png" alt="" />
-                  </div>
-                  <div className="content">
-                    <h6 className="title">FREE SHIPPING</h6>
-                  
-                  </div>
-                </div>
-              </div>
-              {/* End Service Promo Single Item */}
-              {/* Other service items remain the same */}
-            </div>
-          </div>
-        </div>
-      </div>
+      <Slidebar />
+     
   
       <div className="product-default-slider-section section-top-gap-100 section-fluid">
         {/* Start Section Content Text Area */}
@@ -125,66 +67,68 @@ const Content = () => {
               <div className="col-12">
                 {/* Product Items */}
                 <div className="row">
-                  {products.slice(0,4).map((product) => (
-                    <div key={product.ProductId} className="col-12 col-md-3 mb-4">
-                      <div className="product-default-single-item product-color--pink">
-                        <div className="image-box">
-                        <Link
-                            to={`/products/productdetails/${product.ProductId}`}
-                            className="image-link"
-                          >
-                            <img
-                            src={`http://localhost:3000/uploads/${product.Avatar}`} // Đường dẫn ảnh
-                            alt={product.ProductName}
-                            />
-                          </Link>
-                          {product.tag && (
-                            <div className="tag">
-                              <span>{product.tag}</span>
-                            </div>
-                          )}
-                          <div className="action-link">
-                            <div className="action-link-left">
-                            <Link to={`/products/productdetails/${product.ProductId}`}>
-                                Chi tiết
-                              </Link>
-                            </div>
-                            <div className="action-link-right">
-                              <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview">
-                                <i className="icon-magnifier" />
-                              </a>
-                              <a href="wishlist.html">
-                                <i className="icon-heart" />
-                              </a>
-                              <a href="compare.html">
-                                <i className="icon-shuffle" />
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="content">
-                          <div className="content-left">
-                            <h6 className="title">
-                            <Link to={`/products/productdetails/${product.ProductId}`}>
-                            {product.ProductName.split(' ').slice(0, 4).join(' ')}{product.ProductName.split(' ').length > 6 ? '...' : ''}
-                            </Link>
-                            </h6>
-                            <ul className="review-star">
-                              {[...Array(5)].map((_, index) => (
-                                <li className={index < product.stars ? 'fill' : 'empty'} key={index}>
-                                  <i className="ion-android-star" />
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div className="content-right">
-                            <span className="price">{Number(product.Price).toLocaleString()} VNĐ</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+  {products.slice(0, 4).map((product) => (
+    <div key={product.ProductId} className="col-12 col-md-3 mb-4">
+      <div className="product-default-single-item product-color--pink">
+        <div className="image-box">
+          <Link to={`/products/productdetails/${product.ProductId}`} className="image-link">
+            <img
+              src={`http://localhost:3000/uploads/${product.Avatar}`}
+              alt={product.ProductName}
+            />
+          </Link>
+          {product.tag && (
+            <div className="tag">
+              <span>{product.tag}</span>
+            </div>
+          )}
+          <div className="action-link">
+            <div className="action-link-left">
+              <Link to={`/products/productdetails/${product.ProductId}`}>Chi tiết</Link>
+            </div>
+            <div className="action-link-right">
+              <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview">
+                <i className="icon-magnifier" />
+              </a>
+              <a href="wishlist.html">
+                <i className="icon-heart" />
+              </a>
+              <a href="compare.html">
+                <i className="icon-shuffle" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="content">
+          <div className="content-left">
+            <h6 className="title">
+              <Link to={`/products/productdetails/${product.ProductId}`}>
+                {product.ProductName.split(' ').slice(0, 4).join(' ')}
+                {product.ProductName.split(' ').length > 6 ? '...' : ''}
+              </Link>
+            </h6>
+            <ul className="review-star">
+              {[...Array(5)].map((_, index) => (
+                <li
+                  className={index < product.stars ? 'fill' : 'empty'}
+                  key={index}
+                >
+                  <i className="ion-android-star" />
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="content-right">
+            <span className="price">
+              {Number(product.Price).toLocaleString()} VNĐ
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
               </div>
             </div>
           </div>
@@ -284,7 +228,69 @@ const Content = () => {
         </div>
         {/* End Product Wrapper */}
       </div>
+      <div className="service-promo-section section-top-gap-100">
+        <div className="service-wrapper">
+          <div className="container">
+            <div className="row">
+              {/* Start Service Promo Single Item */}
+              <div className="col-lg-3 col-sm-6 col-12">
+                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
+                  <div className="image">
+                    <img src="/images/service-promo-5.png" alt="" />
+                  </div>
+                  <div className="content">
+                    <h6 className="title">FREE SHIPPING</h6>
+                   
+                  </div>
+                </div>
+              </div>
+              {/* End Service Promo Single Item */}
+               {/* Start Service Promo Single Item */}
+               <div className="col-lg-3 col-sm-6 col-12">
+                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
+                  <div className="image">
+                    <img src="/images/service-promo-5.png" alt="" />
+                  </div>
+                  <div className="content">
+                    <h6 className="title">FREE SHIPPING</h6>
+                   
+                  </div>
+                </div>
+              </div>
+              {/* End Service Promo Single Item */}
+               {/* Start Service Promo Single Item */}
+               <div className="col-lg-3 col-sm-6 col-12">
+                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
+                  <div className="image">
+                    <img src="/images/service-promo-5.png" alt="" />
+                  </div>
+                  <div className="content">
+                    <h6 className="title">FREE SHIPPING</h6>
+                   
+                  </div>
+                </div>
+              </div>
+              {/* End Service Promo Single Item */}
+               {/* Start Service Promo Single Item */}
+               <div className="col-lg-3 col-sm-6 col-12">
+                <div className="service-promo-single-item" data-aos="fade-up" data-aos-delay={0}>
+                  <div className="image">
+                    <img src="/images/service-promo-5.png" alt="" />
+                  </div>
+                  <div className="content">
+                    <h6 className="title">FREE SHIPPING</h6>
+                  
+                  </div>
+                </div>
+              </div>
+              {/* End Service Promo Single Item */}
+              {/* Other service items remain the same */}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    
   );
   
 };

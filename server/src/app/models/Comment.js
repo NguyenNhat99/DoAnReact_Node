@@ -25,10 +25,12 @@ const Comment = sequelize.define('Comment', {
   createdAt: {
     type: DataTypes.DATE,
     allowNull: true,
+    defaultValue: DataTypes.NOW,
   },
   updatedAt: {
     type: DataTypes.DATE,
     allowNull: true,
+    defaultValue: DataTypes.NOW,
   },
 }, {
   tableName: 'comments',

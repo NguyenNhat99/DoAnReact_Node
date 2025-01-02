@@ -48,8 +48,6 @@ exports.getAccountById = async (req, res) => {
         res.status(500).json({ error: error.message }); // Xử lý lỗi
     }
 };
-
-// admin
 exports.getProfileAdmin = async(req,res) => {
     try{
         const user = req.user;
@@ -161,5 +159,37 @@ exports.changePassword = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+};
+
+
+exports.changeGroupAccount = async (req, res) => {
+    try {
+        const { id } = req.params; // Lấy id từ params
+        const { GroupId } = req.body;
+
+        // Tìm tài khoản theo AccountId
+        const account = await Account.findOne({
+            where: { AccountId: id }, // Truy vấn theo AccountId
+        });
+
+        if (!account) {
+            return res.status(404).json({ message: "Tài khoản không tìm thấy." });
+        }
+        if(account.IdGroup === 1){
+            if(account.IdGroup == GroupId){
+                res.status(500).json({message: "Tài khoản này hiện tài đang quyền quản trị"})
+            }
+            account.IdGroup = 2;
+        }else{
+            if(account.IdGroup === GroupId){
+                res.status(500).json({message: "Tài khoản này hiện tài đang quyền người dùng"})
+            }
+            account.IdGroup = 1;
+        }
+        await account.save();
+        res.json(account); // Trả về tài khoản tìm thấy
+    } catch (error) {
+        res.status(500).json({ error: error.message }); // Xử lý lỗi
     }
 };
